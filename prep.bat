@@ -1,13 +1,14 @@
 @echo off
 cls
 
+set forge_ver=1.20.1-47.3.10
 set varda_dir=%userprofile%\curseforge\minecraft\Instances\Varda
 set varda_srv=%cd%\varda-server
 set zip_file=%cd%\varda-server.zip
 
 ::echo Varda project files located in %varda_dir%
 
-if exist %varda_srv% rmdir /s /q %varda_srv%
+if exist %varda_srv% rd /s /q %varda_srv%
 md %varda_srv%
 xcopy /s %varda_dir% %varda_srv%
 
@@ -18,18 +19,18 @@ del %varda_srv%\rhino.local.properties
 del %varda_srv%\patchouli_data.json
 del %varda_srv%\options.txt
 del %varda_srv%\minecraftinstance.json
-rmdir /s /q %varda_srv%\shaderpacks
-rmdir /s /q %varda_srv%\saves
-rmdir /s /q %varda_srv%\profileimage
-rmdir /s /q %varda_srv%\modernfix
-rmdir /s /q %varda_srv%\logs
-rmdir /s /q %varda_srv%\local
-rmdir /s /q %varda_srv%\fancymenu_data
+rd /s /q %varda_srv%\shaderpacks
+rd /s /q %varda_srv%\saves
+rd /s /q %varda_srv%\profileimage
+rd /s /q %varda_srv%\modernfix
+rd /s /q %varda_srv%\logs
+rd /s /q %varda_srv%\local
+rd /s /q %varda_srv%\fancymenu_data
 del "%varda_srv%\resourcepacks\Quark Programmer Art.zip"
-rmdir /s /q %varda_srv%\kubejs\assets
-rmdir /s /q %varda_srv%\kubejs\config
-rmdir /s /q %varda_srv%\kubejs\data
-rmdir /s /q %varda_srv%\kubejs\client_scripts
+rd /s /q %varda_srv%\kubejs\assets
+rd /s /q %varda_srv%\kubejs\config
+rd /s /q %varda_srv%\kubejs\data
+rd /s /q %varda_srv%\kubejs\client_scripts
 
 del %varda_srv%\mods\aether_emissivity-*.jar
 del %varda_srv%\mods\BetterAdvancements-*.jar
@@ -65,6 +66,8 @@ del %varda_srv%\mods\TipTheScales-*.jar
 del %varda_srv%\mods\ToastControl-*.jar
 del %varda_srv%\mods\TravelersTitles-*.jar
 del %varda_srv%\mods\zmedievalmusic-*.jar
+
+curl -o %varda_srv%\forge-%forge_ver%-installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/%forge_ver%/forge-%forge_ver%-installer.jar
 
 if exist %zip_file% del %zip_file%
 ::tar -cvzf %zip_file% --format ustar %varda_dir%\*

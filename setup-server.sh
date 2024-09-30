@@ -65,4 +65,3 @@ ExecStop=/usr/bin/tmux -L minecraft send-keys -t varda 'stop' ENTER
 WantedBy=multi-user.target
 EOF
 sudo systemctl daemon-reload
-
