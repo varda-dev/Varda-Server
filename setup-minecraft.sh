@@ -19,6 +19,7 @@ if [ ! -d "$VARDA_DIR" ]; then
     sudo mkdir -p /srv/minecraft/varda
     sudo unzip "$VARDA_ZIP" -d "$VARDA_DIR"
     sudo cp start.sh "$VARDA_DIR"
+    echo "eula=true" | sudo tee -a "$VARDA_DIR"/eula.txt
     sudo chown -R minecraft:minecraft /srv/minecraft/varda
     (cd "$VARDA_DIR" && sudo -u minecraft -H sh -c "java -jar forge-*-installer.jar --installServer")
 fi

@@ -38,7 +38,6 @@ del %varda_srv%\mods\BetterF3-*.jar
 del %varda_srv%\mods\clean_tooltips-*.jar
 del %varda_srv%\mods\cleanview-*.jar
 del %varda_srv%\mods\Controlling-forge-*.jar
-del %varda_srv%\mods\cosmeticarmorreworked-*.jar
 del %varda_srv%\mods\craftingtweaks-*.jar
 del %varda_srv%\mods\Ding-*.jar
 del %varda_srv%\mods\durabilitytooltip-*.jar
