@@ -19,6 +19,5 @@ if [ ! -d "$VARDA_DIR" ]; then
     sudo mkdir -p /srv/minecraft/varda
     sudo unzip "$VARDA_ZIP" -d "$VARDA_DIR"
     sudo chown -R minecraft:minecraft /srv/minecraft/varda
-    sudo -u minecraft -H sh -c "java -jar $VARDA_DIR/forge-*-installer.jar"
-    (cd "$VARDA_DIR" && java -jar forge-*-installer.jar --installServer)
+    (cd "$VARDA_DIR" && sudo -u minecraft -H sh -c "java -jar forge-*-installer.jar --installServer")
 fi
