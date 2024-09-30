@@ -18,6 +18,22 @@ fi
 if [ ! -d "$VARDA_DIR" ]; then
     sudo mkdir -p /srv/minecraft/varda
     sudo unzip "$VARDA_ZIP" -d "$VARDA_DIR"
+    sudo cp start.sh "$VARDA_DIR"
     sudo chown -R minecraft:minecraft /srv/minecraft/varda
     (cd "$VARDA_DIR" && sudo -u minecraft -H sh -c "java -jar forge-*-installer.jar --installServer")
+fi
+
+if [ ! -f "$VARDA_DIR"/forge-*-installer.jar.log ]; then
+    echo "Forge didn't install..."
+    exit 1
+fi
+
+if [ -f "$VARDA_DIR"/run.bat ]; then
+    sudo rm "$VARDA_DIR"/run.bat
+fi
+if [ -f "$VARDA_DIR"/run.sh ]; then
+    sudo rm "$VARDA_DIR"/run.sh
+fi
+if [ -f "$VARDA_DIR"/forge-*-installer.jar ]; then
+    sudo rm "$VARDA_DIR"/forge-*-installer.jar
 fi
