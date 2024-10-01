@@ -22,7 +22,7 @@ if [ ! -d "$VARDA_DIR" ]; then
     sudo mkdir -p /srv/minecraft/varda
     sudo unzip "$VARDA_ZIP" -d "$VARDA_DIR"
     echo "#!/usr/bin/env sh" | sudo tee "$VARDA_DIR"/start.sh
-    echo "/usr/bin/java -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions @user_jvm_args.txt @libraries/net/minecraftforge/forge/$FORGE_VER/unix_args.txt nogui" | sudo tee -a "$VARDA_DIR"/start.sh
+    echo "/usr/bin/java -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions @user_jvm_args.txt @libraries/net/minecraftforge/forge/${FORGE_VER}/unix_args.txt nogui" | sudo tee -a "$VARDA_DIR"/start.sh
     echo "eula=true" | sudo tee -a "$VARDA_DIR"/eula.txt
     sudo chown -R minecraft:minecraft /srv/minecraft/varda
     sudo -u minecraft -H sh -c "chmod u+x $VARDA_DIR/start.sh"
