@@ -10,5 +10,7 @@
 3. SCP varda-server.zip over to your home folder.
    * `scp varda-server.zip <IP>:/home/<you>`
 4. Run `./setup-minecraft.sh` from the git repo on the server to setup the server files.
-5. Start the server via `./start.sh` as the minecraft user once to make sure it all works.
+5. Adjust `user_jvm_args.txt` to suit your server's maximum usable RAM. e.g. -Xmx4G, -Xmx6G, or -Xmx10G, etc... 
+   * `sudo -u minecraft -H sh -c "echo '\n-Xmx10G' >> /srv/minecraft/varda/user_jvm_args.txt"`
+6. Start the server via `./start.sh` as the minecraft user once to make sure it all works.
    * `sudo -u minecraft -H sh -c "(cd /srv/minecraft/varda && ./start.sh)"`
