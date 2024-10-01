@@ -4,6 +4,8 @@ set -euo pipefail
 VARDA_USR=minecraft
 VARDA_DIR=/srv/minecraft/varda
 VARDA_SRV=/etc/systemd/system/varda.service
+VARDA_CRON="0 3 * * * /usr/bin/systemctl restart varda.service"
+
 
 if sudo systemctl is-active --quiet varda; then
     echo "Varda service running. Stop it to continue..."
@@ -65,3 +67,9 @@ ExecStop=/usr/bin/tmux -L minecraft send-keys -t varda 'stop' ENTER
 WantedBy=multi-user.target
 EOF
 sudo systemctl daemon-reload
+
+# Add a restart cron
+sudo crontab -l > rootcrons
+echo "$VARDA_CRON" >> rootcrons
+sudo crontab rootcrons
+sudo rm rootcrons
