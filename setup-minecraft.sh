@@ -5,6 +5,7 @@ VARDA_RAM=10
 VARDA_USR=minecraft
 VARDA_ZIP=~/varda-server.zip
 VARDA_DIR=/srv/minecraft/varda
+FORGE_VER="1.20.1-47.3.10"
 
 # Checks
 if [ ! -f "$VARDA_ZIP" ]; then
@@ -20,11 +21,11 @@ fi
 if [ ! -d "$VARDA_DIR" ]; then
     sudo mkdir -p /srv/minecraft/varda
     sudo unzip "$VARDA_ZIP" -d "$VARDA_DIR"
-    #sudo cp start.sh "$VARDA_DIR"
     echo "#!/usr/bin/env sh" | sudo tee "$VARDA_DIR"/start.sh
-    echo "/usr/bin/java -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.3.10/unix_args.txt "$@" nogui" | sudo tee -a "$VARDA_DIR"/start.sh
+    echo '/usr/bin/java -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions @user_jvm_args.txt @libraries/net/minecraftforge/forge/$FORGE_VER/unix_args.txt "$@" nogui' | sudo tee -a "$VARDA_DIR"/start.sh
     echo "eula=true" | sudo tee -a "$VARDA_DIR"/eula.txt
     sudo chown -R minecraft:minecraft /srv/minecraft/varda
+    sudo -u minecraft -H sh -c "chmod u+x $VARDA_DIR/start.sh"
     (cd "$VARDA_DIR" && sudo -u minecraft -H sh -c "java -jar forge-*-installer.jar --installServer")
 fi
 
