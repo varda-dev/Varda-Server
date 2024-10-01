@@ -1,8 +1,9 @@
 @echo off
 cls
 
-set forge_ver=1.20.1-47.3.10
+::set forge_ver=1.20.1-47.3.10
 set varda_dir=%userprofile%\curseforge\minecraft\Instances\Varda
+set mc_instance_json=%varda_dir%\minecraftinstance.json
 set varda_srv=%cd%\varda-server
 set zip_file=%cd%\varda-server.zip
 
@@ -66,7 +67,15 @@ del %varda_srv%\mods\ToastControl-*.jar
 del %varda_srv%\mods\TravelersTitles-*.jar
 del %varda_srv%\mods\zmedievalmusic-*.jar
 
-curl -o %varda_srv%\forge-%forge_ver%-installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/%forge_ver%/forge-%forge_ver%-installer.jar
+for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content -Path '%mc_instance_json%' -Raw | ConvertFrom-Json).manifest.minecraft.version"`) do set mc_ver=%%i
+for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content -Path '%mc_instance_json%' -Raw | ConvertFrom-Json).baseModLoader.forgeVersion"`) do set forge_ver=%%i
+for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content -Path '%mc_instance_json%' -Raw | ConvertFrom-Json).baseModLoader.downloadUrl"`) do set forge_url=%%i
+
+::echo Minecraft Version: %mc_ver%
+::echo Forge Version: %forge_ver%
+::echo Download URL: %forge_url%
+
+curl -o %varda_srv%\forge-%mc_ver%-%forge_ver%-installer.jar %forge_url%
 
 if exist %zip_file% del %zip_file%
 ::tar -cvzf %zip_file% --format ustar %varda_dir%\*
