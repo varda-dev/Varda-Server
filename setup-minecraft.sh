@@ -21,6 +21,7 @@ fi
 if [ ! -d "$VARDA_DIR" ]; then
     sudo mkdir -p /srv/minecraft/varda
     sudo unzip "$VARDA_ZIP" -d "$VARDA_DIR"
+    # Need to do this dynamically after forge has been installed so i can set the right version without having to specify it up above
     echo "#!/usr/bin/env sh" | sudo tee "$VARDA_DIR"/start.sh
     echo "/usr/bin/java -server -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions @user_jvm_args.txt @libraries/net/minecraftforge/forge/${FORGE_VER}/unix_args.txt nogui" | sudo tee -a "$VARDA_DIR"/start.sh
     echo "eula=true" | sudo tee -a "$VARDA_DIR"/eula.txt
