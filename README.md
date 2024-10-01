@@ -1,5 +1,5 @@
 # Varda Server Setup (Debian)
-1. Close the repo to the server.
+1. Clone the repo to the server.
   * `git clone https://github.com/varda-dev/Varda-Server.git`
 2. Run `./setup-server.sh` to prepare the server. This creates a user, sets up directories and systemd scripts.
 # Minecraft Server Setup
