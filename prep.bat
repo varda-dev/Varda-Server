@@ -62,7 +62,8 @@ del %varda_srv%\mods\zmedievalmusic-*.jar
 
 for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content -Path '%mc_instance_json%' -Raw | ConvertFrom-Json).manifest.minecraft.version"`) do set mc_ver=%%i
 for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content -Path '%mc_instance_json%' -Raw | ConvertFrom-Json).baseModLoader.forgeVersion"`) do set forge_ver=%%i
-for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content -Path '%mc_instance_json%' -Raw | ConvertFrom-Json).baseModLoader.downloadUrl"`) do set forge_url=%%i
+:: not the right forge install jar
+::for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content -Path '%mc_instance_json%' -Raw | ConvertFrom-Json).baseModLoader.downloadUrl"`) do set forge_url=%%i
 
 curl -o %varda_srv%\forge-%mc_ver%-%forge_ver%-installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/%mc_ver%-%forge_ver%/forge-%mc_ver%-%forge_ver%-installer.jar
 
