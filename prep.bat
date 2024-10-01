@@ -75,7 +75,7 @@ for /f "usebackq tokens=*" %%i in (`powershell -noprofile -command "(Get-Content
 ::echo Forge Version: %forge_ver%
 ::echo Download URL: %forge_url%
 
-curl -o %varda_srv%\forge-%mc_ver%-%forge_ver%-installer.jar %forge_url%
+curl -o %varda_srv%\forge-%mc_ver%-%forge_ver%-installer.jar https://maven.minecraftforge.net/net/minecraftforge/forge/%mc_ver%-%forge_ver%/forge-%mc_ver%-%forge_ver%-installer.jar
 
 if exist %zip_file% del %zip_file%
 ::tar -cvzf %zip_file% --format ustar %varda_dir%\*
